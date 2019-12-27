@@ -1,6 +1,7 @@
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart' hide NestedScrollView;
 import 'package:flutter/services.dart';
+import 'package:weread_ink_flutter/book_content.dart';
 import 'package:weread_ink_flutter/book_desc.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -116,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   InkWell(
                     highlightColor: Colors.black,
                     onHighlightChanged: (val) {
-                      print('$val');
+                      print(val);
                       if (!val) {
                         Navigator.push(
                           _context,
@@ -417,6 +418,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                               highlightIndex = '$index${item['list'].indexOf(list)}';
                                             } else {
                                               highlightIndex = null;
+                                              Navigator.push(
+                                                _context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => BookContent(),
+                                                ),
+                                              );
                                             }
                                           });
                                         },

@@ -76,7 +76,6 @@ class _BookDescState extends State<BookDesc> {
                 setState(() {
                   fullScreen = !fullScreen;
                   processState = true;
-                  print('11');
                 });
               },
               child: Container(
@@ -515,7 +514,6 @@ class _BookDescState extends State<BookDesc> {
                       child: InkWell(
                         onTap: () {},
                         onHighlightChanged: (val) {
-                          print(processState);
                           setState(() {
                             focusIndex = val ? 'b2' : null;
                             if (!val) {
@@ -625,10 +623,13 @@ class _BookDescState extends State<BookDesc> {
                             },
                           ),
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_right,
-                          size: 40,
-                          color: _process == 100.0 ? Colors.grey : Colors.black,
+                        InkWell(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            size: 40,
+                            color: _process == 100.0 ? Colors.grey : Colors.black,
+                          ),
                         ),
                       ],
                     ),
