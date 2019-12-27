@@ -1,5 +1,6 @@
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart' hide NestedScrollView;
+import 'package:flutter/services.dart';
 import 'package:weread_ink_flutter/book_desc.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -97,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _context = context;
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 
   Widget moreColumn(data, count) {
