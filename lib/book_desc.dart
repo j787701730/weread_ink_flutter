@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BookDesc extends StatefulWidget {
@@ -9,7 +10,10 @@ class _BookDescState extends State<BookDesc> {
   double width;
   double height;
   bool fullScreen = false;
+  bool openMore = true;
   String focusIndex;
+  String moreOrClose;
+  double _process = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +79,11 @@ class _BookDescState extends State<BookDesc> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  ),
+                                ),
                                 width: width / 3,
                                 child: Image.asset('images/ia_100000007.jpg'),
                               ),
@@ -85,7 +94,7 @@ class _BookDescState extends State<BookDesc> {
                                 ),
                                 child: Text(
                                   '一禅小和尚',
-                                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Container(
@@ -109,6 +118,7 @@ class _BookDescState extends State<BookDesc> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 Expanded(
                                   child: Column(
@@ -155,9 +165,7 @@ class _BookDescState extends State<BookDesc> {
                                       ),
                                       Text(
                                         '332人点评',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: TextStyle(height: 1.3),
                                       )
                                     ],
                                   ),
@@ -184,9 +192,7 @@ class _BookDescState extends State<BookDesc> {
                                       ),
                                       Text(
                                         '阅读此书',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: TextStyle(height: 1.3),
                                       )
                                     ],
                                   ),
@@ -201,8 +207,7 @@ class _BookDescState extends State<BookDesc> {
                               child: Text(
                                 '简介',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 40,
+                                  fontSize: 30,
                                 ),
                               ),
                             ),
@@ -215,8 +220,7 @@ class _BookDescState extends State<BookDesc> {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ),
@@ -228,11 +232,29 @@ class _BookDescState extends State<BookDesc> {
                                       ),
                                     ),
                                   ),
-                                  child: Text(
-                                    '更多',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                  child: InkWell(
+                                    onTap: () {},
+                                    onHighlightChanged: (val) {
+                                      setState(() {
+                                        if (val) {
+                                          moreOrClose = 'more';
+                                        } else {
+                                          moreOrClose = null;
+                                          if (!fullScreen) {
+                                            fullScreen = !fullScreen;
+                                          } else {
+                                            openMore = !openMore;
+                                          }
+                                        }
+                                      });
+                                    },
+                                    highlightColor: Colors.black,
+                                    child: Text(
+                                      '更多',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: moreOrClose == 'more' ? Colors.white : Colors.black,
+                                      ),
                                     ),
                                   ),
                                 )
@@ -269,140 +291,136 @@ class _BookDescState extends State<BookDesc> {
                     color: Colors.white,
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Expanded(
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 't1' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/font.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 't1' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/font.jpg'),
+                                ),
+                                Text(
+                                  '文字',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 't1' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '文字',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 't1' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 't2' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/download.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 't2' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/download.jpg'),
+                                ),
+                                Text(
+                                  '下载到本地',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 't2' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '下载到本地',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 't2' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 't3' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/book.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 't3' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/book.jpg'),
+                                ),
+                                Text(
+                                  '已加入到书架',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 't3' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '已加入到书架',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 't3' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 't4' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/shop.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 't4' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/shop.jpg'),
+                                ),
+                                Text(
+                                  '已购买',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 't4' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '已购买',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 't4' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -435,110 +453,105 @@ class _BookDescState extends State<BookDesc> {
                     color: Colors.white,
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Expanded(
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 'b1' : null;
-                                if (!val) {
-                                  Navigator.pop(context);
-                                }
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              color: Colors.transparent,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/back.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 'b1' : null;
+                              if (!val) {
+                                Navigator.pop(context);
+                              }
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/back.jpg'),
+                                ),
+                                Text(
+                                  '返回',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 'b1' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '返回',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 'b1' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 'b2' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/process.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 'b2' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/process.jpg'),
+                                ),
+                                Text(
+                                  '进度',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 'b2' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '进度',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 'b2' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {},
-                            onHighlightChanged: (val) {
-                              setState(() {
-                                focusIndex = val ? 'b3' : null;
-                                if (!val) {}
-                              });
-                            },
-                            highlightColor: Colors.black,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    height: 26,
-                                    child: Image.asset('images/menu.jpg'),
+                      Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          onHighlightChanged: (val) {
+                            setState(() {
+                              focusIndex = val ? 'b3' : null;
+                              if (!val) {}
+                            });
+                          },
+                          highlightColor: Colors.black,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  height: 26,
+                                  child: Image.asset('images/menu.jpg'),
+                                ),
+                                Text(
+                                  '目录',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 1.4,
+                                    color: focusIndex == 'b3' ? Colors.white : Colors.black,
                                   ),
-                                  Text(
-                                    '目录',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: focusIndex == 'b3' ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -548,6 +561,146 @@ class _BookDescState extends State<BookDesc> {
                 ),
               ),
             ),
+            Positioned(
+              left: 0,
+              bottom: 56,
+              child: Offstage(
+                offstage: false,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  height: 120,
+                  width: width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('2分钟'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.keyboard_arrow_left,
+                            size: 40,
+                            color: _process == 0.0 ? Colors.grey : Colors.black,
+                          ),
+                          Container(
+                            width: width * 0.6,
+                            child: CupertinoSlider(
+                              value: _process,
+                              min: 0,
+                              max: 100,
+                              onChanged: (val) {
+                                setState(() {
+                                  _process = val;
+                                });
+                              },
+                            ),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_right,
+                            size: 40,
+                            color: _process == 100.0 ? Colors.grey : Colors.black,
+                          ),
+                        ],
+                      ),
+                      Text('版权信息'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              child: Offstage(
+                offstage: openMore,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      openMore = !openMore;
+                    });
+                  },
+                  child: Container(
+                    color: Color(0x99999999),
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: height * 0.7,
+                      width: width - 70,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            20,
+                          ),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                '简介',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                ),
+                              ),
+                              Material(
+                                color: Colors.white,
+                                child: InkWell(
+                                  onTap: () {},
+                                  highlightColor: Colors.black,
+                                  onHighlightChanged: (val) {
+                                    setState(() {
+                                      if (val) {
+                                        moreOrClose = 'close';
+                                      } else {
+                                        openMore = !openMore;
+                                        moreOrClose = null;
+                                      }
+                                    });
+                                  },
+                                  child: Icon(
+                                    Icons.clear,
+                                    color: moreOrClose == 'close' ? Colors.white : Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 10,
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Text(
+                                '一禅的人物设定为一个对世界有强烈好奇心、每天都能从生活中发现趣味和智慧哲学的暖萌小和尚。他的师父阿斗是一个不拘小节，偶尔鸡汤偶尔老童趣的出家人，一禅和他的师父生活在一座景色优美的寺庙里，周围的村庄里住着一群善良淳朴的人们。漫画以每篇以20格左右的水墨长条漫画展开故事剧情，在妙趣横生的日常故事中，展现纷繁世间的纯净真情，带给一禅、每一集的出场人物、也给读者讲述一个又一个意味深长的道理。',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.5,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
