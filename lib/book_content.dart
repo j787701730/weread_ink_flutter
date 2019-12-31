@@ -146,9 +146,9 @@ class _BookContentState extends State<BookContent> {
       }
       setState(() {
         bookMenu = res.data['data'];
-        if (index > height / 2 / 34.0) {
+        if (index > height / 2 / 44.0) {
           _bookMenuController
-              .jumpTo((index + 1) * 34.0 - (height / 2 < (bookMenu.length - index) * 34 ? height / 2 : height));
+              .jumpTo((index + 1) * 44.0 - (height / 2 < (bookMenu.length - index) * 44 ? height / 2 : height));
         }
       });
     }
@@ -187,7 +187,7 @@ class _BookContentState extends State<BookContent> {
                 Navigator.of(context).pop();
               },
               child: Container(
-                height: 34,
+                height: 44,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   border: Border(
@@ -195,14 +195,20 @@ class _BookContentState extends State<BookContent> {
                       color: Colors.black,
                     ),
                   ),
-                  color: param['id'] == bookMenu[index]['id'] ? Colors.black : Colors.white,
                 ),
-                child: Text(
-                  bookMenu[index]['name'],
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: param['id'] == bookMenu[index]['id'] ? Colors.white : Colors.black,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: 3,
+                    bottom: 3,
+                  ),
+                  color: param['id'] == bookMenu[index]['id'] ? Colors.black : Colors.white,
+                  child: Text(
+                    bookMenu[index]['name'],
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: param['id'] == bookMenu[index]['id'] ? Colors.white : Colors.black,
+                    ),
                   ),
                 ),
               ),

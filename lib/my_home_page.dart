@@ -117,7 +117,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   InkWell(
                     highlightColor: Colors.black,
                     onHighlightChanged: (val) {
-                      print(val);
                       if (!val) {
                         Navigator.push(
                           _context,

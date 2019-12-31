@@ -126,13 +126,21 @@ class _BookDescState extends State<BookDesc> {
                                 ),
                                 child: Text(
                                   '三国演义',
-                                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'SourceHanSerifCN',
+                                  ),
                                 ),
                               ),
                               Container(
                                 child: Text(
                                   '罗贯中',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'SourceHanSerifCN',
+                                  ),
                                 ),
                               )
                             ],
