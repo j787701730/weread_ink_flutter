@@ -410,25 +410,32 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: item['list'].map<Widget>(
                                   (list) {
                                     return Container(
-                                      child: InkWell(
-                                        highlightColor: Colors.black,
-                                        onHighlightChanged: (val) {
+                                      child: GestureDetector(
+                                        onTapDown: (e) {
                                           setState(() {
-                                            if (val) {
-                                              highlightIndex = '$index${item['list'].indexOf(list)}';
-                                            } else {
-                                              highlightIndex = null;
-                                              Navigator.push(
-                                                _context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => BookContent(),
-                                                ),
-                                              );
-                                            }
+                                            highlightIndex = '$index${item['list'].indexOf(list)}';
                                           });
                                         },
-                                        onTap: () {},
+                                        onTapUp: (e) {
+                                          setState(() {
+                                            highlightIndex = null;
+                                            Navigator.push(
+                                              _context,
+                                              MaterialPageRoute(
+                                                builder: (context) => BookContent(),
+                                              ),
+                                            );
+                                          });
+                                        },
+                                        onTapCancel: () {
+                                          setState(() {
+                                            highlightIndex = null;
+                                          });
+                                        },
                                         child: Container(
+                                          color: highlightIndex == '$index${item['list'].indexOf(list)}'
+                                              ? Colors.black
+                                              : Colors.white,
                                           padding: EdgeInsets.only(
                                             top: 6,
                                             bottom: 6,
