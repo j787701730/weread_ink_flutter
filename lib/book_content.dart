@@ -160,6 +160,8 @@ class _BookContentState extends State<BookContent> {
     double top = MediaQuery.of(context).padding.top;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      drawerEdgeDragWidth: 0,
+      drawerScrimColor: Colors.transparent,
       endDrawer: Container(
         decoration: BoxDecoration(
           color: Colors.white,
