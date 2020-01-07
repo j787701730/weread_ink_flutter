@@ -284,6 +284,7 @@ class _BookshelfState extends State<Bookshelf> {
                       },
                       onTapUp: (e) {
                         _changeBottomIndex(null);
+                        Navigator.pop(context);
                       },
                       onTapCancel: () {
                         _changeBottomIndex(null);

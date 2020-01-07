@@ -101,6 +101,9 @@ class _BookDescState extends State<BookDesc> {
                             children: <Widget>[
                               GestureDetector(
                                 onTap: () {
+                                  setState(() {
+                                    fullScreen = true;
+                                  });
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:weread_ink_flutter/book_content.dart';
 import 'package:weread_ink_flutter/book_desc.dart';
 import 'package:weread_ink_flutter/bookshelf.dart';
+import 'package:weread_ink_flutter/top_list.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -533,18 +534,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 margin: EdgeInsets.only(top: 20),
                                 padding: EdgeInsets.only(top: 20),
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '查看全部',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      _context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TopList(),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_right,
-                                    ),
-                                  ],
+                                    );
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '查看全部',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.keyboard_arrow_right,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

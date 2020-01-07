@@ -161,13 +161,15 @@ class _BookContentState extends State<BookContent> {
       ),
     );
 
-    setState(() {
-      ajaxData = res.data;
-      getPageOffsets(ajaxData['0']['content']);
-      _controller.jumpToPage(flag == 'prev' ? pageConfig.length - 1 : ajaxData['prev'] == '' ? 0 : 1);
-      _setBookmark();
-      loading = false;
-    });
+    if (mounted) {
+      setState(() {
+        ajaxData = res.data;
+        getPageOffsets(ajaxData['0']['content']);
+        _controller.jumpToPage(flag == 'prev' ? pageConfig.length - 1 : ajaxData['prev'] == '' ? 0 : 1);
+        _setBookmark();
+        loading = false;
+      });
+    }
   }
 
   getBookMenu({@required height}) async {
