@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide NestedScrollView;
 import 'package:flutter/services.dart';
 import 'package:weread_ink_flutter/book_content.dart';
 import 'package:weread_ink_flutter/book_desc.dart';
+import 'package:weread_ink_flutter/bookshelf.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -309,19 +310,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                         ),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                '进入书架',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              _context,
+                              MaterialPageRoute(
+                                builder: (context) => Bookshelf(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  '进入书架',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_right,
-                              ),
-                            ],
+                                Icon(
+                                  Icons.keyboard_arrow_right,
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],
